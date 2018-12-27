@@ -1,5 +1,6 @@
 package com.example.test.weather;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 private ImageView UpdatBtn;
+private ImageView SelectCityBtn;
 private TextView cityNameT,cityT,timeT,humidityT,weekT,pmDataT,pmQualityT,temperatureT,climateT,windT;
 private ImageView weatherStateImg,pmStateImg;
     @Override
@@ -27,6 +29,8 @@ private ImageView weatherStateImg,pmStateImg;
         setContentView(R.layout.activity_main);
         UpdatBtn=findViewById(R.id.title_city_update);
         UpdatBtn.setOnClickListener(this);
+        SelectCityBtn=(ImageView)findViewById(R.id.title_city_manager);
+        SelectCityBtn.setOnClickListener(this);
         initView();
 
         //网络状态
@@ -105,6 +109,11 @@ private ImageView weatherStateImg,pmStateImg;
     public void onClick(View v) {
         if(v.getId()==R.id.title_city_update){
             getWeatherDatafromNet("101010100");
+        }
+        if (v.getId()==R.id.title_city_manager)
+        {
+            Intent intent=new Intent(this,SelectCity.class);
+            startActivity(intent);
         }
     }
 
