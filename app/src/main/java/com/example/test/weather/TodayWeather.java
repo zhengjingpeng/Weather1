@@ -2,10 +2,6 @@ package com.example.test.weather;
 
 public class TodayWeather {
     private String city;
-    private String updatetime;
-    public String toString(){
-        return ""
-    }
 
     public String getCity() {
         return city;
@@ -39,12 +35,12 @@ public class TodayWeather {
         this.shidu = shidu;
     }
 
-    public String getPm2() {
-        return pm2;
+    public String getPm25() {
+        return pm25;
     }
 
-    public void setPm2(String pm2) {
-        this.pm2 = pm2;
+    public void setPm25(String pm25) {
+        this.pm25 = pm25;
     }
 
     public String getQuality() {
@@ -103,9 +99,12 @@ public class TodayWeather {
         this.type = type;
     }
 
+    private String updatetime;
+
+
     private String wendu;
     private String shidu;
-    private String pm2.5;
+    private String pm25;
     private String quality;
     private String fengxiang;
     private  String fengli;
@@ -113,4 +112,21 @@ public class TodayWeather {
     private String high;
     private String low;
     private String type;
+    public String toString(){
+        return "today-weather{"+
+                "city="+city+'\''+
+                "updatetime='"+updatetime+'\''+
+                "wendu="+wendu+'\''+
+                "pm25="+pm25+'\''+
+                "fengxiang="+fengxiang+'\''+
+                "quality="+quality+'\''+
+                "fengli="+fengli+'\''+
+                "date="+date+'\''+
+                "high="+high+'\''+
+                "low="+low+'\''+
+                "type="+type+'\''+
+                '}';
+
+    }
+
 }
