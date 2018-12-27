@@ -19,13 +19,15 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 private ImageView UpdatBtn;
-private TextView cityNameT,cityT;
+private TextView cityNameT,cityT,timeT,humidityT,weekT,pmDataT,pmQualityT,temperatureT,climateT,windT;
+private ImageView weatherStateImg,pmStateImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UpdatBtn=findViewById(R.id.title_city_update);
         UpdatBtn.setOnClickListener(this);
+        initView();
 
         //网络状态
         if(CheckNet.getNetState(this)==CheckNet.NET_NONE){
@@ -36,6 +38,34 @@ private TextView cityNameT,cityT;
             getWeatherDatafromNet("101010100");
         }
     }
+
+    private void initView() {
+        cityNameT=findViewById(R.id.title_city_name);
+        cityT = findViewById(R.id.todayinfo1_cityName);
+        timeT = findViewById(R.id.todayinfo1_updateTime);
+        humidityT =findViewById(R.id.todayinfo1_humidity);
+        weekT = findViewById(R.id.todayinfo2_week);
+        pmDataT = findViewById(R.id.todayinfo1_pm25);
+        pmQualityT =findViewById(R.id.todayinfo1_pm25status);
+        temperatureT = findViewById(R.id.todayinfo2_temperature);
+        climateT =findViewById(R.id.todayinfo2_weatherState);
+        windT = findViewById(R.id.todayinfo2_wind);
+
+        weatherStateImg = (ImageView)findViewById(R.id.todayinfo2_weatherStatusImg);
+
+        cityNameT.setText("N/A");
+        cityT.setText("N/A");
+        timeT.setText("N/A");
+        humidityT.setText("N/A");
+        weekT.setText("N/A");
+        pmDataT.setText("N/A");
+        pmQualityT.setText("N/A");
+        temperatureT.setText("N/A");
+        climateT.setText("N/A");
+        windT.setText("N/A");
+
+    }
+
     private void getWeatherDatafromNet(String cityCode) {
         final String address = "http://wthrcdn.etouch.cn/WeatherApi?citykey="+cityCode;
         Log.d("Address:",address);
