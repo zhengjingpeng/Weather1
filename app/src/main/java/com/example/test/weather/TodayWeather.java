@@ -2,6 +2,17 @@ package com.example.test.weather;
 
 public class TodayWeather {
     private String city;
+    private String updatetime;
+    private String wendu;
+    private String shidu;
+    private String pm25;
+    private String quality;
+    private String fengxiang;
+    private  String fengli;
+    private String date;
+    private String high;
+    private String low;
+    private String type;
 
     public String getCity() {
         return city;
@@ -99,19 +110,8 @@ public class TodayWeather {
         this.type = type;
     }
 
-    private String updatetime;
 
 
-    private String wendu;
-    private String shidu;
-    private String pm25;
-    private String quality;
-    private String fengxiang;
-    private  String fengli;
-    private String date;
-    private String high;
-    private String low;
-    private String type;
     public String toString(){
         return "today-weather{"+
                 "city="+city+'\''+

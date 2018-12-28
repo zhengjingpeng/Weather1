@@ -13,12 +13,13 @@ public class CityDB {
     private SQLiteDatabase db;
 
     public CityDB(Context context, String path){
-        db = context.openOrCreateDatabase(CITY_DB_NAME,Context.MODE_PRIVATE,null);
+        db = context.openOrCreateDatabase(path,Context.MODE_PRIVATE,null);
     }
 
     public List<City> getCityList()
     {
         List<City> list = new ArrayList<>();
+        //Cursor cursor = db.rawQuery("SELECT * from "+CITY_TABLE_NAME,null);
         Cursor cursor = db.rawQuery("SELECT * from "+CITY_TABLE_NAME,null);
         while(cursor.moveToNext())
         {
@@ -34,5 +35,4 @@ public class CityDB {
         return list;
     }
 }
-
 
