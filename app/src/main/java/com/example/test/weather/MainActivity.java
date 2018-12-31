@@ -1,6 +1,8 @@
 package com.example.test.weather;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
  ImageView SelectCityBtn;
  TextView cityNameT,cityT,timeT,humidityT,weekT,pmDataT,pmQualityT,temperatureT,climateT,windT;
  ImageView PM25Img,weatherImg;
- private static String updateCityCode;
+    private String updateCityCode = "-1";
 private  Handler mHandler = new Handler(new Handler.Callback() {
     @Override
     public boolean handleMessage(Message message) {
@@ -76,8 +78,19 @@ private  Handler mHandler = new Handler(new Handler.Callback() {
         SelectCityBtn=findViewById(R.id.title_city_manager);
         SelectCityBtn.setOnClickListener(this);
         updateCityCode = getIntent().getStringExtra("citycode");
-        if(updateCityCode!="-1") {
+        if(updateCityCode!="-1"&& updateCityCode != null)
+        {
             getWeatherDatafromNet(updateCityCode);
+        }else
+        {
+            SharedPreferences sharedPreferences = getSharedPreferences(
+                    "CityCodePreference",Activity.MODE_PRIVATE);
+            String defaultCityCode = sharedPreferences.getString("citycode","");
+            if(defaultCityCode!=null){
+                Log.d("defaultCityCode",defaultCityCode);
+                getWeatherDatafromNet(defaultCityCode);
+            }
+
         }
 
 
@@ -87,7 +100,7 @@ private  Handler mHandler = new Handler(new Handler.Callback() {
         }else
         {
             Log.d("net","网络通畅");
-            getWeatherDatafromNet("101010100");
+            /*getWeatherDatafromNet("101010100");*/
         }
     }
 
@@ -164,7 +177,15 @@ private  Handler mHandler = new Handler(new Handler.Callback() {
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.title_city_update){
-            getWeatherDatafromNet("101010100");
+            SharedPreferences mySharePre = getSharedPreferences("CityCodePreference",Activity.MODE_PRIVATE);
+            String sharecode = mySharePre.getString("citycode","");
+            if(!sharecode.equals(""))
+            {
+                Log.d("sharecode",sharecode);
+                getWeatherDatafromNet(sharecode);
+            }else {
+                getWeatherDatafromNet("101010100");
+            }
         }
         if (v.getId()==R.id.title_city_manager)
         {
