@@ -27,9 +27,10 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
  ImageView UpdatBtn;
  ImageView SelectCityBtn;
+ ImageView LocateBtn;
  TextView cityNameT,cityT,timeT,humidityT,weekT,pmDataT,pmQualityT,temperatureT,climateT,windT;
  ImageView PM25Img,weatherImg;
-    private String updateCityCode = "-1";
+ private String updateCityCode = "-1";
 private  Handler mHandler = new Handler(new Handler.Callback() {
     @Override
     public boolean handleMessage(Message message) {
@@ -77,6 +78,8 @@ private  Handler mHandler = new Handler(new Handler.Callback() {
         UpdatBtn.setOnClickListener(this);
         SelectCityBtn=findViewById(R.id.title_city_manager);
         SelectCityBtn.setOnClickListener(this);
+        LocateBtn =findViewById(R.id.title_city_locate);
+        LocateBtn.setOnClickListener(this);
         updateCityCode = getIntent().getStringExtra("citycode");
         if(updateCityCode!="-1"&& updateCityCode != null)
         {
@@ -176,7 +179,8 @@ private  Handler mHandler = new Handler(new Handler.Callback() {
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.title_city_update){
+        if(v.getId()==R.id.title_city_update)
+        {
             SharedPreferences mySharePre = getSharedPreferences("CityCodePreference",Activity.MODE_PRIVATE);
             String sharecode = mySharePre.getString("citycode","");
             if(!sharecode.equals(""))
@@ -184,12 +188,17 @@ private  Handler mHandler = new Handler(new Handler.Callback() {
                 Log.d("sharecode",sharecode);
                 getWeatherDatafromNet(sharecode);
             }else {
-                getWeatherDatafromNet("101010100");
+                getWeatherDatafromNet("101280800");
             }
         }
         if (v.getId()==R.id.title_city_manager)
         {
             Intent intent=new Intent(this,SelectCity.class);
+            startActivity(intent);
+        }
+        if(v.getId()== R.id.title_city_locate){
+            Log.d("click","title_city_locate");
+            Intent intent = new Intent(this,Location.class);
             startActivity(intent);
         }
     }
